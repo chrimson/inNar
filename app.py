@@ -29,12 +29,13 @@ STORY = load_story()
 
 @app.route('/', methods=['GET', 'POST'])
 def game():
-    node = "start"
+    node = 'start'
     if request.method == 'POST':
         node = request.form.get('node', 'start')
 
-    scene = STORY.get(node, STORY["start"])
-    return render_template("index.html", scene=scene)
+    title = STORY['title']
+    scene = STORY.get(node, STORY['start'])
+    return render_template('index.html', title=title, scene=scene)
 
 @app.route('/edit', methods=['GET', 'POST'])
 @auth.login_required
@@ -52,7 +53,7 @@ def edit_story():
     with open(STORY_FILE, 'r') as f:
         content = f.read()
 
-    return render_template("edit.html", content=content)
+    return render_template('edit.html', content=content)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

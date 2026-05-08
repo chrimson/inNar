@@ -1,33 +1,37 @@
 {
-    "start": {
-        "text": "You wake up in a dark forest. There are two paths.",
-        "choices": [
-            {
-                "text": "Take the left path toward the glowing light",
-                "next": "light"
-            },
-            {
-                "text": "Take the right path into the thick mist",
-                "next": "mist"
-            }
-        ]
-    },
-    "light": {
-        "text": "The light was a cozy cottage! The owner invites you in for tea. You win!",
-        "choices": [
-            {
-                "text": "Play Again",
-                "next": "start"
-            }
-        ]
-    },
-    "mist": {
-        "text": "A grue eats you in the dark. Game over.",
-        "choices": [
-            {
-                "text": "Try Again",
-                "next": "start"
-            }
-        ]
-    }
+  "title": "The Mystery Forest",
+
+  "start": {
+    "text": "You wake up in a dark forest. There are two paths.",
+    "choices": [
+      {
+        "text": "Take the left path toward the glowing light",
+        "next": "light"
+      },
+      {
+        "text": "Take the right path into the thick mist",
+        "next": "mist"
+      }
+    ]
+  },
+
+  "light": {
+    "text": "The light was a cozy cottage! The owner invites you in for tea. You win!",
+    "choices": [
+      {
+        "text": "Play Again",
+        "next": "start"
+      }
+    ]
+  },
+
+  "mist": {
+    "text": "A grue eats you in the dark. Game over.",
+    "choices": [
+      {
+        "text": "Try Again",
+        "next": "start"
+      }
+    ]
+  }
 }
