@@ -20,7 +20,7 @@
 
     <div id="choices">
         {% for choice in scene['choices'] %}
-            <a href="/{{ choice['next'] }}" class="choice-btn">
+            <a href="{{ url_for('game', node=choice['next']) }}" class="choice-btn">
                 {{ choice['text'] }}
             </a>
         {% endfor %}
