@@ -1,0 +1,12 @@
+services:
+  innar:
+    image: chrimson/innar:latest
+    ports:
+      - 5000:5000
+    networks:
+      - charlie_default
+    restart: always
+
+networks:
+  charlie_default:
+    external: true

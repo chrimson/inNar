@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adventure Game</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 50px auto; line-height: 1.6; }
+        .choice-btn { 
+            display: inline-block; 
+            background: #007bff; color: white; 
+            padding: 10px 20px; margin: 10px 5px; 
+            text-decoration: none; border-radius: 5px; 
+        }
+        .choice-btn:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>The Mystery Forest</h1>
+    
+    <p>{{ scene['text'] }}</p>
+
+    <div id="choices">
+        {% for choice in scene['choices'] %}
+            <a href="/{{ choice['next'] }}" class="choice-btn">
+                {{ choice['text'] }}
+            </a>
+        {% endfor %}
+    </div>
+</body>
+</html>
