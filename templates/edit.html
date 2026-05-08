@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Story</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 20px auto; padding: 0 20px; }
+        textarea { width: 100%; height: 500px; font-family: monospace; padding: 10px; }
+        .save-btn { background: #28a745; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>JSON Story Editor</h1>
+    <p>Be careful: Invalid JSON will break the game!</p>
+    
+    <form method="POST">
+        <textarea name="story_json">{{ content }}</textarea>
+        <br><br>
+        <button type="submit" class="save-btn">Save Story</button>
+        <a href="{{ url_for('game') }}">Cancel</a>
+    </form>
+</body>
+</html>
