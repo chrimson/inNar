@@ -20,9 +20,12 @@
 
     <div id="choices">
         {% for choice in scene['choices'] %}
-            <a href="{{ url_for('game', node=choice['next']) }}" class="choice-btn">
-                {{ choice['text'] }}
-            </a>
+            <form action="{{ url_for('game') }}" method="POST" style="display: inline;">
+                <input type="hidden" name="node" value="{{ choice['next'] }}">
+                <button type="submit" class="choice-btn">
+                    {{ choice['text'] }}
+                </button>
+            </form>
         {% endfor %}
     </div>
 </body>
