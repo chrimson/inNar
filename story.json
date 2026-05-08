@@ -1,6 +1,5 @@
 {
   "title": "The Mystery Forest",
-
   "start": {
     "text": "You wake up in a dark forest. There are two paths.",
     "choices": [
@@ -14,7 +13,6 @@
       }
     ]
   },
-
   "light": {
     "text": "The light was a cozy cottage! The owner invites you in for tea. You win!",
     "choices": [
@@ -24,13 +22,38 @@
       }
     ]
   },
-
   "mist": {
+    "text": "It leads to an cold dark cave, and also a blue pond.",
+    "choices": [
+      {
+        "text": "Enter the dark cave",
+        "next": "dark"
+      },
+      {
+        "text": "Walk into the pond",
+        "next": "pond"
+      },
+      {
+        "text": "Go back",
+        "next": "start"
+      }
+    ]
+  },
+  "dark": {
     "text": "A grue eats you in the dark. Game over.",
     "choices": [
       {
         "text": "Try Again",
         "next": "start"
+      }
+    ]
+  },
+  "pond": {
+    "text": "You take a refreshing bath in the water.",
+    "choices": [
+      {
+        "text": "Get out",
+        "next": "mist"
       }
     ]
   }
