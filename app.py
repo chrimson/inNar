@@ -23,7 +23,7 @@ def load_story():
 
 def save_story(data):
     with open(STORY_FILE, 'w') as f:
-        json.dump(data, f, indent=2)
+        json.dump(data, f, indent=4)
 
 STORY = load_story()
 
