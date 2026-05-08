@@ -3,6 +3,8 @@ services:
     image: chrimson/innar:latest
     ports:
       - 5000:5000
+    volumes:
+      - ./story.json:/app/story.json
     networks:
       - charlie_default
     restart: always
