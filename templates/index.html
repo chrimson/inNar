@@ -11,6 +11,12 @@
             text-decoration: none; border-radius: 5px; 
         }
         .choice-btn:hover { background: #0056b3; }
+        .edit-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -28,5 +34,7 @@
             </form>
         {% endfor %}
     </div>
+
+    <a href="{{ url_for('edit_story') }}" class="edit-link">Edit</a>
 </body>
 </html>
