@@ -19,11 +19,12 @@ def verify(username, password):
 
 def load_story():
     with open(STORY_FILE, 'r') as f:
-        return json.load(f)
+        return f.read()
 
 def save_story(data):
-    with open(STORY_FILE, 'w') as f:
-        json.dump(data, f, indent=4)
+    with open(STORY_FILE, 'w', newline='\n') as f:
+        clean_data = data.replace('\r', '')
+        f.write(clean_data)
 
 STORY = load_story()
 
@@ -33,8 +34,9 @@ def game():
     if request.method == 'POST':
         node = request.form.get('node', 'start')
 
-    title = STORY['title']
-    scene = STORY.get(node, STORY['start'])
+    JSON = json.loads(STORY)
+    title = JSON['title']
+    scene = JSON.get(node, JSON['start'])
     return render_template('index.html', title=title, scene=scene)
 
 @app.route('/edit', methods=['GET', 'POST'])
@@ -42,11 +44,8 @@ def game():
 def edit_story():
     global STORY
     if request.method == 'POST':
-        new_story_text = request.form.get('story_json')
-        new_story_data = json.loads(new_story_text)
-
-        save_story(new_story_data)
-        STORY = new_story_data
+        STORY = request.form.get('story_json')
+        save_story(STORY)
 
         return redirect(url_for('game'))
 
@@ -56,4 +55,4 @@ def edit_story():
     return render_template('edit.html', content=content)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0')
