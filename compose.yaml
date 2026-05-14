@@ -4,6 +4,12 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - ./story.json:/app/story.json
+      - ./story.txt:/app/story.txt
       - ./auth.json:/app/auth.json
+    networks:
+      - charlie_default
     restart: always
+
+networks:
+  charlie_default:
+    external: true
