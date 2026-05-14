@@ -1,0 +1,37 @@
+The Mystery Forest
+by Gemini
+
+start ---
+
+You wake up in a dark forest. There are two paths.
+
+Take the left path toward the glowing light : light
+
+Take the right path into the thick mist : mist
+
+
+light ---
+The light was a cozy cottage!
+
+The owner invites you in for tea. You win!
+
+Play Again : start
+
+
+mist ---
+It leads to an cold dark cave and also a blue pond.
+Enter the dark cave : dark
+
+Walk into the pond : pond
+Go back : start
+
+
+
+
+dark ---
+A grue eats you in the dark. Game over.
+Try Again : start
+
+pond ---
+You take a refreshing bath in the water. Your clothes are now wet.
+Get out : mist

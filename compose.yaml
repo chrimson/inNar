@@ -6,10 +6,4 @@ services:
     volumes:
       - ./story.json:/app/story.json
       - ./auth.json:/app/auth.json
-    networks:
-      - charlie_default
     restart: always
-
-networks:
-  charlie_default:
-    external: true

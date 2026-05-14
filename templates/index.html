@@ -3,24 +3,35 @@
 <head>
     <title>Interactive Narrative</title>
     <style>
-        body { font-family: sans-serif; max-width: 600px; margin: 50px auto; line-height: 1.6; }
+        body {
+            font-family: sans-serif;
+            margin: 50px auto;
+            max-width: 600px;
+            line-height: 1.6;
+        }
         .choice-btn { 
             display: inline-block; 
             background: #007bff; color: white; 
             padding: 10px 20px; margin: 10px 5px; 
             text-decoration: none; border-radius: 5px; 
         }
-        .choice-btn:hover { background: #0056b3; }
+        .choice-btn:hover {
+            background: #0056b3;
+        }
         .edit-link {
             position: fixed;
             bottom: 20px;
             right: 20px;
             text-decoration: none;
         }
+        .byline {
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
     <h1>{{ title }}</h1>
+    <div class="byline">{{ byline }}</div>
     
     <p>{{ scene['text'] | safe }}</p>
 

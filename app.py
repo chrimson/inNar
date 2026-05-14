@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 auth = HTTPBasicAuth()
 
-STORY_FILE = 'story.json'
+STORY_FILE = 'story.txt'
 AUTH_FILE = 'auth.json'
 
 @auth.verify_password
@@ -18,8 +18,30 @@ def verify(username, password):
         return username
 
 def load_story():
+    story = {}
+    scene = ''
     with open(STORY_FILE, 'r') as f:
-        return f.read()
+        lines = f.read().splitlines()
+    story['title'] = lines[0]
+    story['byline'] = lines[1]
+
+    for i in range(2, len(lines)):
+        line = lines[i].strip()
+
+        if line.endswith('---'):
+            scene = line.removesuffix("---").strip()
+            story[scene] = { 'text' : '', 'choices' : [] };
+
+        elif ' : ' in line:
+            choice = line.split(" : ")
+            text = choice[0].strip()
+            next_scene = choice[1].strip()
+            story[scene]['choices'].append({'text':text, 'next':next_scene})
+
+        elif line != '':
+            story[scene]['text'] += line + '<p>'
+
+    return story
 
 def save_story(data):
     with open(STORY_FILE, 'w', newline='\n') as f:
@@ -34,18 +56,17 @@ def game():
     if request.method == 'POST':
         node = request.form.get('node', 'start')
 
-    JSON = json.loads(STORY)
-    title = JSON['title']
-    scene = JSON.get(node, JSON['start'])
-    return render_template('index.html', title=title, scene=scene)
+    scene = STORY.get(node, STORY['start'])
+    return render_template('index.html', title=STORY['title'], byline=STORY['byline'], scene=scene)
 
 @app.route('/edit', methods=['GET', 'POST'])
 @auth.login_required
 def edit_story():
     global STORY
     if request.method == 'POST':
-        STORY = request.form.get('story_json')
-        save_story(STORY)
+        story_text = request.form.get('story_text')
+        save_story(story_text)
+        STORY = load_story()
 
         return redirect(url_for('game'))
 
