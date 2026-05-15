@@ -41,32 +41,33 @@ def load_story():
         elif line != '':
             story[scene]['text'] += line + '<p>'
 
-    return story
+    first = list(story)[2]
+    return story, first
 
 def save_story(data):
     with open(STORY_FILE, 'w', newline='\n') as f:
         clean_data = data.replace('\r', '')
         f.write(clean_data)
 
-STORY = load_story()
+STORY, FIRST = load_story()
 
 @app.route('/', methods=['GET', 'POST'])
 def game():
-    node = 'start'
+    node = FIRST
     if request.method == 'POST':
-        node = request.form.get('node', 'start')
+        node = request.form.get('node')
 
-    scene = STORY.get(node, STORY['start'])
+    scene = STORY.get(node)
     return render_template('index.html', title=STORY['title'], byline=STORY['byline'], scene=scene)
 
 @app.route('/edit', methods=['GET', 'POST'])
 @auth.login_required
 def edit_story():
-    global STORY
+    global STORY, FIRST
     if request.method == 'POST':
         story_text = request.form.get('story_text')
         save_story(story_text)
-        STORY = load_story()
+        STORY, FIRST = load_story()
 
         return redirect(url_for('game'))
 
