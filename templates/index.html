@@ -37,7 +37,7 @@
 
     <div id="choices">
         {% for choice in scene['choices'] %}
-            <form action="{{ url_for('game') }}" method="POST" style="display: inline;">
+            <form action="{{ url_for('game', story_file=story_file) }}" method="POST" style="display: inline;">
                 <input type="hidden" name="node" value="{{ choice['next'] }}">
                 <button type="submit" class="choice-btn">
                     {{ choice['text'] }}
@@ -46,6 +46,6 @@
         {% endfor %}
     </div>
 
-    <a href="{{ url_for('edit_story') }}" class="edit-link">Edit</a>
+    <a href="{{ url_for('edit_story', story_file=story_file) }}" class="edit-link">Edit</a>
 </body>
 </html>

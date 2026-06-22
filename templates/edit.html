@@ -35,7 +35,7 @@
         <textarea name="story_text">{{ content }}</textarea>
         <br><br>
         <button type="submit" class="save-btn">Save Story</button>
-        <a href="{{ url_for('game') }}">Cancel</a>
+        <a href="{{ url_for('game', story_file=story_file) }}">Cancel</a>
     </form>
 </body>
 </html>
