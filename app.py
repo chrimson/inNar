@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, redirect
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.middleware.proxy_fix import ProxyFix
 import json
+import os
 
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
@@ -21,7 +22,7 @@ def verify(username, password):
 def load_story(story_file):
     story = {}
     scene = ''
-    with open(story_file, 'r') as f:
+    with open(f'stories/{story_file}', 'r') as f:
         lines = f.read().splitlines()
     story['title'] = lines[0]
     story['byline'] = lines[1]
@@ -47,13 +48,38 @@ def load_story(story_file):
 
 
 def save_story(story_file, data):
-    with open(story_file, 'w', newline='\n') as f:
+    with open(f'stories/{story_file}', 'w', newline='\n') as f:
         clean_data = data.replace('\r', '')
         f.write(clean_data)
 
 
+@app.route('/', methods=['GET'])
+def library():
+    stories = []
+    items = os.listdir('stories')
+
+    for item in items:
+        lines = []
+        if os.path.isfile(f'stories/{item}'):
+            with open(f'stories/{item}', 'r') as f:
+                lines = f.read().splitlines()
+        stories.append({
+            'file' : f,
+            'title' : lines[0],
+            'byline' : lines[1]
+        })
+
+    return render_template('library.html', stories=stories)
+
+
+@app.route('/create', methods=['GET', 'POST'])
+@auth.login_required
+def create():
+    return render_template('create.html')
+
+
 @app.route('/<story_file>', methods=['GET', 'POST'])
-def game(story_file):
+def story(story_file):
     story, first = load_story(story_file)
 
     node = first
@@ -76,9 +102,9 @@ def edit_story(story_file):
         save_story(story_file, story_text)
         story, first = load_story(story_file)
 
-        return redirect(url_for('game', story_file=story_file))
+        return redirect(url_for('story', story_file=story_file))
 
-    with open(story_file, 'r') as f:
+    with open(f'stories/{story_file}', 'r') as f:
         content = f.read()
 
     return render_template('edit.html', story_file=story_file, content=content)

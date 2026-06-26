@@ -30,22 +30,17 @@
     </style>
 </head>
 <body>
-    <h1>{{ title }}</h1>
-    <div class="byline">{{ byline }}</div>
-    
-    <p>{{ scene['text'] | safe }}</p>
+    <h1>Eli's Stories</h1>
 
-    <div id="choices">
-        {% for choice in scene['choices'] %}
-            <form action="{{ url_for('story', story_file=story_file) }}" method="POST" style="display: inline;">
-                <input type="hidden" name="node" value="{{ choice['next'] }}">
-                <button type="submit" class="choice-btn">
-                    {{ choice['text'] }}
-                </button>
-            </form>
-        {% endfor %}
-    </div>
+    {% for story in stories %}
+        <b>{{ story.title }}</b> <i>{{ story.byline }}</i><p>
+    {% endfor %}
 
-    <a href="{{ url_for('edit_story', story_file=story_file) }}" class="edit-link">Edit</a>
+    <a href="https://limson.care/in/7398">Inner Dimension 7398</a><p>
+
+    <a href="https://limson.care/in/hacker">The Hacker's Hideout</a><p>
+
+    <a href="{{ url_for('create') }}" class="edit-link">Create</a>
+
 </body>
 </html>

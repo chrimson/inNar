@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Story</title>
+    <title>Create Story</title>
     <style>
         body {
             background-color: #5f5f5f;
@@ -28,23 +28,24 @@
     </style>
 </head>
 <body>
-    <h1>Story Editor</h1>
+    <h1>Create Editor</h1>
     <p>Be careful, incorrect format will break the game</p>
     
     <form method="POST">
-        <textarea name="story_text">{{ content }}</textarea>
+        <textarea name="story_text"></textarea>
         <br><br>
         <button type="submit" class="save-btn">Save Story</button>
-        <a href="{{ url_for('story', story_file=story_file) }}">Cancel</a>
+        <a href="">Cancel</a>
     </form>
 
     <h2>Example</h2>
     <pre>
 The Hackers Hideout
-by Eli
+by Eli 
 
-Garage ---
-You come back from school and your dad picks you up.<p>You Know that your dad works for cybersecurity.<p>He says that he will come back in 2 minutes.<p>You waited for 20 minutes and you start to get bored.<p>You see a door. 
+Garage --- 
+You come back from school and your dad picks you up.<p>You Know that your dad works for cybersecurity.<p>He says that he will
+ come back in 2 minutes.<p>You waited for 20 minutes and you start to get bored.<p>You see a door.
 
 Go in : Go in
 
@@ -60,7 +61,7 @@ You see a computer and a paper With 5 passwords.<p>Maybe You should type 1 of th
 
 password : Try again 1
 pa55word : Try again 1
-p@55w#rd : Danger
+p@55w#rd : Danger 
 P@55w#rd : Try again 1
 P@55W#RD : Puzzle 2
 
@@ -74,7 +75,7 @@ Puzzle 2 ---
 You see code. A lot of code. Even more code than you think. What do you do now? 
 
 Copy the code and then go on a website where you paste the code and figure out what it means : Danger
-Click the arrow on the top left corner and then (you think) there will be a message : Puzzle 3  
+Click the arrow on the top left corner and then (you think) there will be a message : Puzzle 3
 
 
 Puzzle 3 ---
@@ -82,7 +83,7 @@ It says "There is ... a door ... in ... front of ... you" but there isn't.
 
 You go back : Danger
 You go to your right : Danger
-You go to your left : Danger 
+You go to your left : Danger
 You go forward and trust the code : finish
 
 
@@ -92,7 +93,7 @@ Try again!
 Try again : Puzzle 1
 
 
-finish --- 
+finish ---
 You see your dad
 
 The end : Garage
