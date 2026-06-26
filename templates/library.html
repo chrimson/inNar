@@ -37,9 +37,7 @@
     <h1>Limson.Library</h1>
 
     {% for story in stories %}
-        <a href="{{ url_for('story', story_file=story.file) }}">
-            <span class="story">{{ story.title }}</span>
-        </a>
+        <a href="{{ url_for('story', story_file=story.file) }}" class="story">{{ story.title }}</a>
         <span class="byline">{{ story.byline }}</span><p>
     {% endfor %}
 
