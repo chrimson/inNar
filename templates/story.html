@@ -18,6 +18,12 @@
         .choice-btn:hover {
             background: #0056b3;
         }
+        .lib-link {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            text-decoration: none;
+        }
         .edit-link {
             position: fixed;
             bottom: 20px;
@@ -30,6 +36,8 @@
     </style>
 </head>
 <body>
+    <a href="{{ url_for('library') }}" class="lib-link">Library</a><p>
+
     <h1>{{ title }}</h1>
     <div class="byline">{{ byline }}</div>
     

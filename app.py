@@ -72,12 +72,6 @@ def library():
     return render_template('library.html', stories=stories)
 
 
-@app.route('/create', methods=['GET', 'POST'])
-@auth.login_required
-def create():
-    return render_template('create.html')
-
-
 @app.route('/<story_file>', methods=['GET', 'POST'])
 def story(story_file):
     story, first = load_story(story_file)
@@ -87,25 +81,30 @@ def story(story_file):
         node = request.form.get('node')
 
     scene = story.get(node)
-    return render_template('index.html',
+    return render_template('story.html',
                            title=story['title'],
                            byline=story['byline'],
                            story_file=story_file,
                            scene=scene)
 
 
+@app.route('/create', methods=['GET', 'POST'])
 @app.route('/<story_file>/edit', methods=['GET', 'POST'])
 @auth.login_required
-def edit_story(story_file):
+def edit_story(story_file=None):
     if request.method == 'POST':
         story_text = request.form.get('story_text')
+        if story_file == None:
+            story_file = request.form.get('story_file')
         save_story(story_file, story_text)
         story, first = load_story(story_file)
 
         return redirect(url_for('story', story_file=story_file))
 
-    with open(f'stories/{story_file}', 'r') as f:
-        content = f.read()
+    content = ''
+    if story_file != None:
+        with open(f'stories/{story_file}', 'r') as f:
+            content = f.read()
 
     return render_template('edit.html', story_file=story_file, content=content)
 

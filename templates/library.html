@@ -24,6 +24,10 @@
             right: 20px;
             text-decoration: none;
         }
+        .story {
+            text-decoration: none;
+            font-weight:: bold;
+        }
         .byline {
             font-style: italic;
         }
@@ -34,10 +38,11 @@
 
     {% for story in stories %}
         <a href="{{ url_for('story', story_file=story.file) }}">
-            <b>{{ story.title }}</b>
-        </a><i>{{ story.byline }}</i><p>
+            <span class="story">{{ story.title }}</span>
+        </a>
+        <span class="byline">{{ story.byline }}</span><p>
     {% endfor %}
 
-    <a href="{{ url_for('create') }}" class="edit-link">Create</a>
+    <a href="{{ url_for('edit_story') }}" class="edit-link">Create</a>
 </body>
 </html>
