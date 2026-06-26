@@ -64,7 +64,7 @@ def library():
             with open(f'stories/{item}', 'r') as f:
                 lines = f.read().splitlines()
         stories.append({
-            'file' : f,
+            'file' : item,
             'title' : lines[0],
             'byline' : lines[1]
         })
