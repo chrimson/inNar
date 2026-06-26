@@ -28,7 +28,13 @@
     </style>
 </head>
 <body>
-    <h1>Story Editor</h1>
+    <h1>Story
+    {% if not story_file %}
+        Creator
+    {% else %}
+        Editor
+    {% endif %}
+    </h1>
     <p>Be careful, incorrect format will break the game</p>
     
     <form method="POST">
